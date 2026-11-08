@@ -127,7 +127,7 @@ Frontend không tính adaptive, nhưng phải truyền đúng tín hiệu và kh
 - Sau khi quay về, hiển thị “đang xác nhận thanh toán” và poll API trạng thái đơn (giới hạn số lần, khoảng cách), đến khi nhận SUCCESS/FAILED/PENDING quá hạn.
 - Nếu người dùng đóng tab trước khi quay về, khi mở lại website phải có cơ chế kiểm tra đơn đang chờ.
 - Với subscription, sau khi thành công phải hiển thị ngày trừ tiền kỳ tiếp theo và link quản lý/hủy ngay trên màn hình xác nhận.
-- Phần thưởng mua hàng (nếu có, ví dụ “mua gói năm tặng 500 XP”) phải hiển thị rõ trước khi thanh toán và cộng sau khi backend xác nhận — không cộng lạc quan trước khi có xác nhận.
+- Phần thưởng mua hàng (nếu có, ví dụ “mua gói năm tặng 500 XP”) phải hiển thị rõ trước khi thanh toán và cộng sau khi backend xác nhận, không cộng lạc quan trước khi có xác nhận.
 - Voucher: hiển thị số tiền giảm và số tiền cuối cùng; nếu voucher không hợp lệ tại thời điểm thanh toán, quay lại bước chọn voucher với thông báo cụ thể, không tự động bỏ im lặng.
 
 ### 3.9 Hồ sơ, thành tích và quản lý subscription
