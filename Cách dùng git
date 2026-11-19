@@ -1,0 +1,59 @@
+Bạn đã có repo trên GitHub (có sẵn README) và muốn thêm file mới lên. Cách đơn giản nhất là git clone, không cần git init hay git remote.
+
+Cách 1: Clone repo về rồi thêm file (khuyên dùng)
+
+Clone repo về máy:
+bash
+git clone https://github.com/<username>/<ten-repo>.git
+cd <ten-repo>
+Copy file mới vào thư mục repo vừa clone (kéo thả hoặc dùng cp).
+Kiểm tra trạng thái:
+bash
+git status
+Thêm file vào staging:
+bash
+git add ten_file.py
+# hoặc thêm tất cả: git add .
+Commit:
+bash
+git commit -m "Add ten_file.py"
+Đẩy lên GitHub:
+bash
+git push
+
+Nếu nhánh mặc định là main và git push báo lỗi, dùng git push origin main.
+
+Cách 2: Bạn đã có sẵn thư mục chứa file trên máy (chưa phải repo)
+
+Lúc này mới cần git init và git remote:
+
+bash
+cd thu-muc-cua-ban
+git init
+git remote add origin https://github.com/<username>/<ten-repo>.git
+git pull origin main --allow-unrelated-histories
+git add .
+git commit -m "Add files"
+git push -u origin main
+
+Bước git pull là để lấy README từ GitHub về trước, tránh xung đột khi push.
+
+Phân biệt nhanh các lệnh:
+
+Lệnh	Dùng khi
+git clone	Repo đã có trên GitHub, muốn tải về máy
+git init	Thư mục trên máy chưa phải repo Git
+git remote add	Nối repo trên máy với repo trên GitHub
+git remote remove	Xóa liên kết remote (không dùng để thêm file)
+
+Kiểm tra lại cuối cùng:
+
+bash
+git log --oneline
+git remote -v
+
+Rồi mở trang GitHub của repo, nếu thấy file mới và commit vừa tạo là đã thành công.
+
+Lưu ý: Nếu GitHub hỏi mật khẩu, bạn cần dùng Personal Access Token thay cho mật khẩu tài khoản (hoặc dùng SSH).
+
+Nếu bạn đang gặp lỗi cụ thể khi chạy lệnh nào, gửi mình nội dung lỗi để xem tiếp nhé.

@@ -1,0 +1,319 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Fullstack Flow" id="fullstack-flow-1">
+    <mxGraphModel dx="860" dy="479" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="headerFE" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontStyle=1;fontSize=14;fontColor=#6c8ebf;" value="FRONTEND (giao diện người dùng)" vertex="1">
+          <mxGeometry height="30" width="360" x="40" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="headerBE" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontStyle=1;fontSize=14;fontColor=#82b366;" value="BACKEND (Spring Boot)" vertex="1">
+          <mxGeometry height="30" width="380" x="420" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="headerData" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontStyle=1;fontSize=14;fontColor=#9673a6;" value="DATA / HẠ TẦNG" vertex="1">
+          <mxGeometry height="30" width="300" x="890" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="headerTester" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontStyle=1;fontSize=14;fontColor=#b85450;" value="TESTER / QA" vertex="1">
+          <mxGeometry height="30" width="340" x="1225" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="feLogin" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Trang đăng nhập&#xa;Nhập email, mật khẩu" vertex="1">
+          <mxGeometry height="50" width="320" x="60" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="beLogin" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="AuthController&#xa;POST /api/auth/login" vertex="1">
+          <mxGeometry height="50" width="200" x="500" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="beCheckPass" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Kiểm tra mật khẩu&#xa;bằng BCrypt" vertex="1">
+          <mxGeometry height="50" width="200" x="500" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="dbUser" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" value="PostgreSQL&#xa;bảng users" vertex="1">
+          <mxGeometry height="50" width="180" x="940" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="beCreateJwt" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Tạo JWT&#xa;(userId, role, hạn dùng)" vertex="1">
+          <mxGeometry height="50" width="200" x="500" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="feSaveToken" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Lưu token vào&#xa;localStorage" vertex="1">
+          <mxGeometry height="50" width="320" x="60" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="testAuth" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" value="Unit test AuthController&#xa;- Sai mật khẩu trả về lỗi&#xa;- Đúng mật khẩu trả về JWT hợp lệ" vertex="1">
+          <mxGeometry height="70" width="330" x="1240" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="feEventList" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Trang danh sách sự kiện" vertex="1">
+          <mxGeometry height="50" width="320" x="60" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="beEventCtrl" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="EventController&#xa;GET /api/events" vertex="1">
+          <mxGeometry height="50" width="200" x="500" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="beEventRepo" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="EventRepository&#xa;→ Hibernate → SQL" vertex="1">
+          <mxGeometry height="50" width="200" x="500" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="dbEvents" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" value="PostgreSQL&#xa;bảng events" vertex="1">
+          <mxGeometry height="50" width="180" x="940" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="feShowEvents" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Hiển thị danh sách sự kiện&#xa;kèm số vé còn lại" vertex="1">
+          <mxGeometry height="50" width="320" x="60" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="testEvent" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" value="Unit test EventController&#xa;- Mock Repository, kiểm tra&#xa;JSON trả về đúng dữ liệu" vertex="1">
+          <mxGeometry height="70" width="330" x="1240" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="feClickBuy" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Người dùng bấm&#xa;&quot;Mua vé&quot;&#xa;(gửi kèm Authorization: Bearer token)" vertex="1">
+          <mxGeometry height="60" width="320" x="60" y="490" as="geometry" />
+        </mxCell>
+        <mxCell id="beJwtFilter" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="① JWT Filter&#xa;kiểm tra token" vertex="1">
+          <mxGeometry height="50" width="200" x="500" y="495" as="geometry" />
+        </mxCell>
+        <mxCell id="beJwtFail" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="401 Unauthorized" vertex="1">
+          <mxGeometry height="40" width="200" x="500" y="570" as="geometry" />
+        </mxCell>
+        <mxCell id="feShowLoginErr" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="Hiện thông báo&#xa;&quot;Vui lòng đăng nhập lại&quot;" vertex="1">
+          <mxGeometry height="40" width="320" x="60" y="570" as="geometry" />
+        </mxCell>
+        <mxCell id="testJwt" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" value="Test JWT Filter&#xa;- Token hết hạn bị từ chối&#xa;- Token sai chữ ký bị từ chối&#xa;- Token giả mạo userId bị phát hiện" vertex="1">
+          <mxGeometry height="80" width="330" x="1240" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="beRateLimit" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="② Rate limiting (Redis)" vertex="1">
+          <mxGeometry height="50" width="200" x="500" y="630" as="geometry" />
+        </mxCell>
+        <mxCell id="beRateFail" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="429 Too Many Requests" vertex="1">
+          <mxGeometry height="40" width="200" x="500" y="710" as="geometry" />
+        </mxCell>
+        <mxCell id="feShowSlowDown" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="Hiện thông báo&#xa;&quot;Bạn đang thao tác quá nhanh&quot;" vertex="1">
+          <mxGeometry height="40" width="320" x="60" y="710" as="geometry" />
+        </mxCell>
+        <mxCell id="testRate" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" value="Test rate limiting&lt;br&gt;- Gửi liên tục quá ngưỡng,&lt;br&gt;kiểm tra request thừa bị 429(quá nhều request)" vertex="1">
+          <mxGeometry height="70" width="330" x="1250" y="640" as="geometry" />
+        </mxCell>
+        <mxCell id="beBookingCtrl" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="③ BookingController&#xa;nhận eventId, quantity" vertex="1">
+          <mxGeometry height="50" width="200" x="500" y="770" as="geometry" />
+        </mxCell>
+        <mxCell id="beLua" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="④ Redis Lua script&#xa;kiểm tra + trừ tồn kho&#xa;(atomic)" vertex="1">
+          <mxGeometry height="60" width="220" x="490" y="850" as="geometry" />
+        </mxCell>
+        <mxCell id="redisStock" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" value="Redis&#xa;ticket:eventId:remaining" vertex="1">
+          <mxGeometry height="50" width="180" x="980" y="855" as="geometry" />
+        </mxCell>
+        <mxCell id="testRace" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;" value="Integration test&amp;nbsp;&lt;br&gt;- Testcontainers Redis thật&lt;br&gt;- 10-100 luồng cùng gọi 1 lúc&lt;br&gt;- Kiểm tra đúng số người thành công&lt;br&gt;bằng đúng số vé, không bán lố" vertex="1">
+          <mxGeometry height="100" width="330" x="1210" y="830" as="geometry" />
+        </mxCell>
+        <mxCell id="decision" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="Còn vé?" vertex="1">
+          <mxGeometry height="60" width="120" x="540" y="940" as="geometry" />
+        </mxCell>
+        <mxCell id="beSoldOut" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="Trả 409&#xa;&quot;Hết vé&quot;" vertex="1">
+          <mxGeometry height="50" width="150" x="800" y="945" as="geometry" />
+        </mxCell>
+        <mxCell id="feSoldOut" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="Hiện &quot;Rất tiếc,&#xa;đã hết vé&quot;" vertex="1">
+          <mxGeometry height="50" width="320" x="60" y="945" as="geometry" />
+        </mxCell>
+        <mxCell id="beTtl" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="⑤ Giữ chỗ có TTL&#xa;(10 phút)" vertex="1">
+          <mxGeometry height="50" width="200" x="500" y="1030" as="geometry" />
+        </mxCell>
+        <mxCell id="testTtl" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" value="Test TTL&#xa;- Rút ngắn TTL còn 2-3 giây&#xa;trong test, kiểm tra key&#xa;tự xóa đúng hạn" vertex="1">
+          <mxGeometry height="80" width="330" x="1220" y="1020" as="geometry" />
+        </mxCell>
+        <mxCell id="beMq" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="⑥ Gửi message vào&#xa;RabbitMQ (order-queue)" vertex="1">
+          <mxGeometry height="50" width="200" x="500" y="1110" as="geometry" />
+        </mxCell>
+        <mxCell id="mqBox" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" value="RabbitMQ&#xa;order-queue" vertex="1">
+          <mxGeometry height="50" width="180" x="970" y="1110" as="geometry" />
+        </mxCell>
+        <mxCell id="beReply" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="⑦ Trả lời NGAY:&#xa;&quot;Giữ chỗ thành công&quot;&#xa;+ orderId" vertex="1">
+          <mxGeometry height="60" width="200" x="500" y="1190" as="geometry" />
+        </mxCell>
+        <mxCell id="feCountdown" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Trang giữ chỗ:&#xa;hiện đồng hồ đếm ngược 10 phút&#xa;+ nút &quot;Thanh toán&quot;" vertex="1">
+          <mxGeometry height="60" width="320" x="60" y="1190" as="geometry" />
+        </mxCell>
+        <mxCell id="dividerLabel" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontStyle=2;fontColor=#666666;" value="phía sau, người dùng không phải chờ&amp;nbsp;" vertex="1">
+          <mxGeometry height="30" width="320" x="440" y="1280" as="geometry" />
+        </mxCell>
+        <mxCell id="beWorker" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="⑧ OrderWorker&#xa;(@RabbitListener)&#xa;tự động nhận message" vertex="1">
+          <mxGeometry height="60" width="200" x="500" y="1330" as="geometry" />
+        </mxCell>
+        <mxCell id="testWorker" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" value="Integration test worker&#xa;- Testcontainers RabbitMQ + Postgres&#xa;- Gửi message, chờ worker xử lý&#xa;- Kiểm tra đơn được tạo đúng&#xa;- Worker tắt giữa chừng, khởi&#xa;động lại không mất message" vertex="1">
+          <mxGeometry height="100" width="330" x="1180" y="1310" as="geometry" />
+        </mxCell>
+        <mxCell id="beSaveOrder" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="⑨ Hibernate ghi đơn&#xa;&quot;pending&quot;" vertex="1">
+          <mxGeometry height="50" width="200" x="500" y="1420" as="geometry" />
+        </mxCell>
+        <mxCell id="dbOrders" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" value="PostgreSQL&#xa;bảng orders" vertex="1">
+          <mxGeometry height="50" width="180" x="980" y="1420" as="geometry" />
+        </mxCell>
+        <mxCell id="bePay" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="⑩ Thanh toán giả lập&#xa;(kiểm tra idempotency)" vertex="1">
+          <mxGeometry height="50" width="200" x="500" y="1500" as="geometry" />
+        </mxCell>
+        <mxCell id="testIdem" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" value="Test idempotency&#xa;- Gửi cùng 1 idempotency key&#xa;2 lần, kiểm tra chỉ tạo&#xa;và thanh toán đúng 1 lần" vertex="1">
+          <mxGeometry height="80" width="330" x="1180" y="1490" as="geometry" />
+        </mxCell>
+        <mxCell id="payDecision" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="Thành công?" vertex="1">
+          <mxGeometry height="60" width="120" x="540" y="1580" as="geometry" />
+        </mxCell>
+        <mxCell id="bePaid" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Đơn → &quot;paid&quot;&lt;br&gt;Xóa key giữ chỗ&lt;br&gt;Gửi email" vertex="1">
+          <mxGeometry height="60" width="200" x="700" y="1680" as="geometry" />
+        </mxCell>
+        <mxCell id="beCancelled" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="Đơn → &quot;cancelled&quot;&#xa;Cộng lại vé (INCR)" vertex="1">
+          <mxGeometry height="60" width="200" x="330" y="1680" as="geometry" />
+        </mxCell>
+        <mxCell id="feSuccess" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Trang xác nhận:&#xa;&quot;Mua vé thành công&quot;&#xa;+ email đã gửi" vertex="1">
+          <mxGeometry height="60" width="220" x="60" y="1680" as="geometry" />
+        </mxCell>
+        <mxCell id="testE2E" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" value="E2E test luồng thành công&#xa;và luồng hết hạn&#xa;- Xác nhận trạng thái đơn&#xa;và số vé khớp nhau ở cuối" vertex="1">
+          <mxGeometry height="80" width="330" x="1170" y="1670" as="geometry" />
+        </mxCell>
+        <mxCell id="jobsTitle" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontStyle=2;fontColor=#666666;" value="chạy song song, độc lập&amp;nbsp;" vertex="1">
+          <mxGeometry height="30" width="320" x="440" y="1780" as="geometry" />
+        </mxCell>
+        <mxCell id="job1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" value="⑪ Scheduled job:&#xa;dọn đơn quá hạn" vertex="1">
+          <mxGeometry height="50" width="200" x="300" y="1820" as="geometry" />
+        </mxCell>
+        <mxCell id="job2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" value="⑫ Reconciliation job:&#xa;so Redis với PostgreSQL" vertex="1">
+          <mxGeometry height="50" width="220" x="560" y="1820" as="geometry" />
+        </mxCell>
+        <mxCell id="testJobs" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" value="Test 2 job nền&#xa;- Tạo đơn quá hạn thủ công,&#xa;chạy job, kiểm tra vé được cộng lại&#xa;- Cố tình làm lệch dữ liệu Redis và&#xa;Postgres, kiểm tra job phát hiện đúng" vertex="1">
+          <mxGeometry height="90" width="330" x="1160" y="1800" as="geometry" />
+        </mxCell>
+        <mxCell id="testLoad" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;fontStyle=1;" value="Load test toàn hệ thống (k6)&#xa;- Giả lập 10.000 request đồng thời&#xa;- Đo throughput, latency p95, error rate&#xa;- Theo dõi qua Prometheus + Grafana&#xa;- So sánh 3 phiên bản (không xử lý /&#xa;khóa DB / Redis+RabbitMQ)" vertex="1">
+          <mxGeometry height="110" width="330" x="1230" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="feLogin" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="beLogin">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="beLogin" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="beCheckPass">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="beCheckPass" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="dbUser">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="beCheckPass" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="beCreateJwt">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="beCreateJwt" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="feSaveToken">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="feSaveToken" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="feEventList">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="feEventList" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="beEventCtrl">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="beEventCtrl" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="beEventRepo">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="beEventRepo" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="dbEvents">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="beEventRepo" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="feShowEvents">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="feShowEvents" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="feClickBuy">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="feClickBuy" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="beJwtFilter">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" edge="1" parent="1" source="beJwtFilter" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;" target="beJwtFail" value="không hợp lệ">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" edge="1" parent="1" source="beJwtFail" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;" target="feShowLoginErr">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e15" edge="1" parent="1" source="beJwtFilter" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="beRateLimit">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e16" edge="1" parent="1" source="beRateLimit" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;" target="beRateFail" value="quá giới hạn">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e17" edge="1" parent="1" source="beRateFail" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;" target="feShowSlowDown">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e18" edge="1" parent="1" source="beRateLimit" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="beBookingCtrl">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e19" edge="1" parent="1" source="beBookingCtrl" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="beLua">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e20" edge="1" parent="1" source="beLua" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="redisStock">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e21" edge="1" parent="1" source="beLua" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="decision">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e22" edge="1" parent="1" source="decision" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;" target="beSoldOut" value="Không">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e23" edge="1" parent="1" source="beSoldOut" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;" target="feSoldOut">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e24" edge="1" parent="1" source="decision" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;" target="beTtl" value="Có">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e25" edge="1" parent="1" source="beTtl" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="beMq">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e26" edge="1" parent="1" source="beMq" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="mqBox">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e27" edge="1" parent="1" source="beMq" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="beReply">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e28" edge="1" parent="1" source="beReply" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;" target="feCountdown">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e29" edge="1" parent="1" source="mqBox" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;" target="beWorker">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e30" edge="1" parent="1" source="beWorker" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="beSaveOrder">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e31" edge="1" parent="1" source="beSaveOrder" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="dbOrders">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e32" edge="1" parent="1" source="beSaveOrder" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="bePay">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e33" edge="1" parent="1" source="bePay" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="payDecision">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e34" edge="1" parent="1" source="payDecision" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;" target="bePaid" value="Có">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e35" edge="1" parent="1" source="payDecision" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;" target="beCancelled" value="Không / hết hạn">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e36" edge="1" parent="1" source="bePaid" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;" target="feSuccess">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t1" edge="1" parent="1" source="beCreateJwt" style="edgeStyle=none;rounded=0;html=1;dashed=1;strokeColor=#d6b656;endArrow=none;" target="testAuth">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t2" edge="1" parent="1" source="beEventCtrl" style="edgeStyle=none;rounded=0;html=1;dashed=1;strokeColor=#d6b656;endArrow=none;" target="testEvent">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t3" edge="1" parent="1" source="beJwtFilter" style="edgeStyle=none;rounded=0;html=1;dashed=1;strokeColor=#d6b656;endArrow=none;" target="testJwt">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t4" edge="1" parent="1" source="beRateLimit" style="edgeStyle=none;rounded=0;html=1;dashed=1;strokeColor=#d6b656;endArrow=none;" target="testRate">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t5" edge="1" parent="1" source="beLua" style="edgeStyle=none;rounded=0;html=1;dashed=1;strokeColor=#d6b656;endArrow=none;" target="testRace">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t6" edge="1" parent="1" source="beTtl" style="edgeStyle=none;rounded=0;html=1;dashed=1;strokeColor=#d6b656;endArrow=none;" target="testTtl">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t7" edge="1" parent="1" source="beWorker" style="edgeStyle=none;rounded=0;html=1;dashed=1;strokeColor=#d6b656;endArrow=none;" target="testWorker">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t8" edge="1" parent="1" source="bePay" style="edgeStyle=none;rounded=0;html=1;dashed=1;strokeColor=#d6b656;endArrow=none;" target="testIdem">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t9" edge="1" parent="1" source="feSuccess" style="edgeStyle=none;rounded=0;html=1;dashed=1;strokeColor=#d6b656;endArrow=none;" target="testE2E">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t10" edge="1" parent="1" source="job1" style="edgeStyle=none;rounded=0;html=1;dashed=1;strokeColor=#d6b656;endArrow=none;" target="testJobs">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t11" edge="1" parent="1" source="job2" style="edgeStyle=none;rounded=0;html=1;dashed=1;strokeColor=#d79b00;endArrow=none;" target="testJobs">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

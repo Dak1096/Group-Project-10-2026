@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TripNest — Quy Nhon Search Results</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+
+  <header class="topbar">
+    <div class="brand">TripNest</div>
+    <div class="top-actions">
+      <span class="lang">VND</span>
+      <span>🌐</span>
+      <span>❓</span>
+      <span>List your property</span>
+      <button class="btn-outline-light">Register</button>
+      <button class="btn-solid-navy">Sign in</button>
+    </div>
+  </header>
+
+  <nav class="nav-tabs">
+    <span class="tab active">🛏️ Stays</span>
+    <span class="tab">✈️ Flights</span>
+    <span class="tab">🏨 Flight + Hotel</span>
+    <span class="tab">🚗 Car rental</span>
+    <span class="tab">🎟️ Attractions</span>
+    <span class="tab">🚕 Airport taxis</span>
+  </nav>
+
+  <div class="searchbar-wrap">
+    <div class="searchbar">
+      <div class="field destination">
+        <label>Enter destination</label>
+        <div class="value">🛏️ Quy Nhon</div>
+      </div>
+      <div class="field dates">
+        <label>Select dates</label>
+        <div class="value">📅 Tue, Sep 29 — Fri, Oct 2</div>
+      </div>
+      <div class="field occupancy">
+        <label>Select occupancy</label>
+        <div class="value" id="occupancy-toggle">
+          👤 <span id="occupancy-text">2 adults · 1 child · 1 room</span> ▾
+        </div>
+        <div class="occupancy-panel hidden" id="occupancy-panel">
+          <div class="counter-row">
+            <span class="label">Adults</span>
+            <div class="counter">
+              <button onclick="changeCount('adults', -1)">−</button>
+              <span class="count" id="adults-count">2</span>
+              <button onclick="changeCount('adults', 1)">+</button>
+            </div>
+          </div>
+          <div class="counter-row">
+            <span class="label">Children</span>
+            <div class="counter">
+              <button onclick="changeCount('children', -1)">−</button>
+              <span class="count" id="children-count">1</span>
+              <button onclick="changeCount('children', 1)">+</button>
+            </div>
+          </div>
+          <div class="counter-row">
+            <span class="label">Rooms</span>
+            <div class="counter">
+              <button onclick="changeCount('rooms', -1)">−</button>
+              <span class="count" id="rooms-count">1</span>
+              <button onclick="changeCount('rooms', 1)">+</button>
+            </div>
+          </div>
+          <button class="done-btn" onclick="document.getElementById('occupancy-panel').classList.add('hidden')">Done</button>
+        </div>
+      </div>
+      <button class="search-btn">Search</button>
+    </div>
+  </div>
+
+  <nav class="breadcrumb">
+    <a href="#">Home</a> <span>›</span>
+    <a href="#">Vietnam</a> <span>›</span>
+    <a href="#">Binh Dinh</a> <span>›</span>
+    <span class="current">Quy Nhon</span> <span>›</span>
+    <span class="current">Search results</span>
+  </nav>
+
+  <div class="layout">
+
+    <aside class="sidebar">
+      <div class="map-card">
+        <div class="map-fake"></div>
+        <span class="pin">📍 Quy Nhon</span>
+        <button class="show-map-btn">📍 Show on map</button>
+      </div>
+
+      <div class="filter-block">
+        <h3>Filter by:</h3>
+
+        <h4>Your budget (per night)</h4>
+        <div class="price-display">VND 200,000 – VND 1,800,000</div>
+        <div class="histogram">
+          <span style="height:20%"></span><span style="height:45%"></span><span style="height:70%"></span>
+          <span style="height:90%"></span><span style="height:60%"></span><span style="height:35%"></span>
+          <span style="height:50%"></span><span style="height:75%"></span><span style="height:30%"></span>
+          <span style="height:15%"></span>
+        </div>
+        <input type="range" min="0" max="2000000" value="1800000">
+
+        <h4>Popular filters</h4>
+        <label class="checkbox-row">
+          <span class="left"><input type="checkbox"> Wonderful 9+</span>
+          <span class="count">73</span>
+        </label>
+        <label class="checkbox-row">
+          <span class="left"><input type="checkbox"> Beachfront</span>
+          <span class="count">165</span>
+        </label>
+        <label class="checkbox-row">
+          <span class="left"><input type="checkbox"> Breakfast included</span>
+          <span class="count">98</span>
+        </label>
+        <label class="checkbox-row">
+          <span class="left"><input type="checkbox"> Free cancellation</span>
+          <span class="count">142</span>
+        </label>
+      </div>
+    </aside>
+
+    <main>
+      <div class="results-header">
+        <h1>Quy Nhon: 302 properties found</h1>
+        <div class="view-toggle">
+          <button class="active">List</button>
+          <button>Grid</button>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <button class="chip">↕️ Sort by: Top picks for families</button>
+        <button class="chip active">VND 200,000 – VND 1,800,000 (per night) <span class="x">✕</span></button>
+      </div>
+
+      <div id="hotel-list"></div>
+    </main>
+  </div>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
