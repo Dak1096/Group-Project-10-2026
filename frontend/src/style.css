@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+/* Giữ lại các biến màu gốc của dự án để không làm hỏng giao diện các trang khác */
+:root {
+  --ink: #15232b;
+  --muted: #5b6b72;
+  --paper: #eef2ef;
+  --card: #fbfcfb;
+  --line: #cbd6d1;
+  --accent: #2540c9;
+  --accent-ink: #ffffff;
+  --xp: #8a5a00;
+  --xp-bg: #fff1cf;
+  --good: #1e7a52;
+  --good-bg: #e2f3ea;
+  --warn: #a5401f;
+  --warn-bg: #fbe9e2;
+  --info-bg: #e4ecfb;
+  --radius: 10px;
+  font-family: 'Be Vietnam Pro', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  line-height: 1.55;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #e7efec;
+    --muted: #9db0a9;
+    --paper: #101a1e;
+    --card: #17252b;
+    --line: #2c3f46;
+    --accent: #7f95ff;
+    --accent-ink: #0b1230;
+    --xp: #f2c566;
+    --xp-bg: #3a2d10;
+    --good: #6fd1a1;
+    --good-bg: #153326;
+    --warn: #ff9b78;
+    --warn-bg: #3a1d12;
+    --info-bg: #1a2850;
+  }
+}
+
+/* Thiết lập cơ bản */
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); }
+
+/* Tùy chỉnh thanh cuộn cho đẹp (tùy chọn) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 4px;
+}

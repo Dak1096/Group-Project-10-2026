@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// 1. NGƯỜI DÙNG
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  name      String?
+  createdAt DateTime @default(now())
+  
+  // Liên kết với lịch sử làm bài
+  attempts  Attempt[]
+}
+
+// 2. KHÓA HỌC (IELTS, TOEIC...)
+model Course {
+  id      Int      @id @default(autoincrement())
+  slug    String   @unique // Ví dụ: 'ielts'
+  title   String
+  lessons Lesson[]
+}
+
+// 3. BÀI HỌC (Nằm trong khóa học)
+model Lesson {
+  id        Int        @id @default(autoincrement())
+  title     String
+  courseId  Int
+  course    Course     @relation(fields: [courseId], references: [id])
+  questions Question[]
+}
+
+// 4. CÂU HỎI (Nằm trong bài học)
+model Question {
+  id          Int      @id @default(autoincrement())
+  text        String   // Nội dung câu hỏi
+  optionA     String
+  optionB     String
+  optionC     String
+  optionD     String
+  correctAns  String   // Lưu 'A', 'B', 'C' hoặc 'D'
+  explanation String?  // Giải thích đáp án
+  difficulty  Int      @default(1) // Độ khó 1-5 (cho Adaptive Learning)
+  
+  lessonId    Int
+  lesson      Lesson   @relation(fields: [lessonId], references: [id])
+  attempts    Attempt[]
+}
+
+// 5. LỊCH SỬ LÀM BÀI (Dùng để tính XP, Streak và Adaptive Learning)
+model Attempt {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  questionId Int
+  isCorrect  Boolean
+  createdAt  DateTime @default(now())
+
+  user       User     @relation(fields: [userId], references: [id])
+  question   Question @relation(fields: [questionId], references: [id])
+}

@@ -1,0 +1,19 @@
+{
+  "name": "jwt-code-root",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "postinstall": "prisma generate"
+  },
+  "dependencies": {
+    "@prisma/adapter-pg": "^7.10.1",
+    "@prisma/client": "^7.10.1",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.23.1",
+    "resend": "^6.37.0"
+  },
+  "devDependencies": {
+    "prisma": "^7.10.1"
+  }
+}
