@@ -1,0 +1,16 @@
+# Chỉ dùng ở LOCAL, thêm bằng cờ -f (KHÔNG dùng trên VPS):
+#   docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build
+# Mở cổng DB/Redis/Qdrant trên 127.0.0.1 để debug bằng công cụ trên máy, tắt HSTS cho localhost.
+services:
+  caddy:
+    environment:
+      HSTS_HEADER: "max-age=0"
+  postgres:
+    ports: ["127.0.0.1:5432:5432"]
+    networks: [data, edge]
+  redis:
+    ports: ["127.0.0.1:6379:6379"]
+    networks: [data, edge]
+  qdrant:
+    ports: ["127.0.0.1:6333:6333"]
+    networks: [data, edge]

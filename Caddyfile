@@ -1,0 +1,34 @@
+# DOMAIN lấy từ .env. Có tên miền thật thì Caddy tự xin và gia hạn HTTPS (Let's Encrypt),
+# tự chuyển HTTP sang HTTPS. DOMAIN=localhost thì dùng chứng chỉ nội bộ khi chạy local.
+{$DOMAIN} {
+	encode zstd gzip
+
+	# Chặn ngoài cùng. Giới hạn chi tiết (body 1 MB cho API thường, 50 MB cho upload PDF,
+	# audio tối đa 30 giây) do backend kiểm tra theo từng route.
+	request_body {
+		max_size 55MB
+	}
+
+	header {
+		Strict-Transport-Security "{$HSTS_HEADER:max-age=31536000}"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		# Cho phép micro (chấm phát âm), tắt camera và vị trí.
+		Permissions-Policy "microphone=(self), camera=(), geolocation=()"
+		# Mới có frame-ancestors. Người 5 và Người 6 bổ sung CSP đầy đủ khi giao diện ổn định
+		# (lưu ý pdf.js worker cần blob:).
+		Content-Security-Policy "frame-ancestors 'none'"
+		-Server
+	}
+
+	# API; flush_interval -1 để chat streaming (SSE) hiện từng token, không bị đệm.
+	handle /api/* {
+		reverse_proxy backend:3000 {
+			flush_interval -1
+		}
+	}
+
+	handle {
+		reverse_proxy frontend:80
+	}
+}

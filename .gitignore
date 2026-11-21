@@ -1,0 +1,9 @@
+
+# --- Bí mật và file local (thêm vào .gitignore hiện có) ---
+.env
+.env.*
+!.env.example
+client_secret*.json
+*.pem
+*.key
+node_modules/

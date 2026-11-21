@@ -1,0 +1,200 @@
+# Docker Compose cho VPS (2 CPU, ~3,8 GB RAM) và chạy thử ở local.
+# - Chỉ Caddy mở cổng ra ngoài (80/443). Postgres, Redis, Qdrant nằm trong mạng "data"
+#   (internal: true) nên không ra internet và không có cổng publish.
+# - Bí mật nằm trong file .env (không commit). Xem .env.example.
+# - Staging: chạy project riêng, ví dụ `docker compose -p staging up -d` (cần cổng/VPS khác).
+
+x-logging: &default-logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+# Backend, migrate và worker dùng chung một image. Tag lấy từ IMAGE_TAG để rollback
+# bằng tag cũ: IMAGE_TAG=<tag-truoc> docker compose up -d
+x-backend: &backend
+  build: ./backend
+  image: app/backend:${IMAGE_TAG:-latest}
+  env_file: .env
+  environment:
+    NODE_ENV: production
+    PORT: "3000"
+    DATABASE_URL: postgresql://${DB_USER}:${DB_PASSWORD}@postgres:5432/${DB_NAME}
+    REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379
+    QDRANT_URL: http://qdrant:6333
+  logging: *default-logging
+
+services:
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      DOMAIN: ${DOMAIN:?Hay dat DOMAIN trong .env}
+      HSTS_HEADER: ${HSTS_HEADER:-max-age=31536000}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      backend:
+        condition: service_started
+      frontend:
+        condition: service_started
+    networks: [edge]
+    mem_limit: 128m
+    logging: *default-logging
+
+  frontend:
+    build: ./frontend
+    image: app/frontend:${IMAGE_TAG:-latest}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://127.0.0.1/ || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    networks: [edge]
+    mem_limit: 64m
+    logging: *default-logging
+
+  # Chạy migration Prisma một lần mỗi lần deploy, xong mới khởi động backend.
+  migrate:
+    <<: *backend
+    command: ["npx", "prisma", "migrate", "deploy"]
+    restart: "no"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks: [data]
+    mem_limit: 512m
+
+  backend:
+    <<: *backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    # Kiểm tra cổng 3000 đã nhận kết nối. Khi backend có route /api/health thì đổi sang gọi route đó.
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('net').connect(3000,'127.0.0.1').on('connect',()=>process.exit(0)).on('error',()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    networks: [edge, data]
+    mem_limit: 512m
+
+  # Worker đọc bảng outbox và gửi sự kiện (Người 3). Bật khi đã có file worker.js:
+  #   docker compose --profile worker up -d
+  worker:
+    <<: *backend
+    command: ["node", "worker.js"]
+    restart: unless-stopped
+    profiles: ["worker"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    networks: [edge, data]
+    mem_limit: 256m
+
+  # Service AI: RAG, ingest tài liệu, chấm phát âm (Người 2, 3). Chưa có code trong repo nên
+  # nằm sau profile "ai". Thêm ./ai-service/Dockerfile rồi bật: docker compose --profile ai up -d
+  ai-service:
+    build: ./ai-service
+    image: app/ai-service:${IMAGE_TAG:-latest}
+    restart: unless-stopped
+    profiles: ["ai"]
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql://${DB_USER}:${DB_PASSWORD}@postgres:5432/${DB_NAME}
+      REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379
+      QDRANT_URL: http://qdrant:6333
+    depends_on:
+      qdrant:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks: [edge, data]
+    mem_limit: 1g
+    logging: *default-logging
+
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER:?}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?}
+      POSTGRES_DB: ${DB_NAME:?}
+    command: ["postgres", "-c", "shared_buffers=128MB", "-c", "max_connections=60"]
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks: [data]
+    mem_limit: 512m
+    logging: *default-logging
+
+  # Redis dùng cho hàng đợi sự kiện (Streams) và bảng xếp hạng (sorted set).
+  # noeviction: hết bộ nhớ thì báo lỗi, không tự xóa dữ liệu sự kiện.
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?}
+    command: >
+      sh -c 'exec redis-server --requirepass "$$REDIS_PASSWORD" --maxmemory 96mb
+      --maxmemory-policy noeviction --appendonly yes'
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -a \"$$REDIS_PASSWORD\" --no-auth-warning ping | grep -q PONG"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks: [data]
+    mem_limit: 160m
+    logging: *default-logging
+
+  qdrant:
+    image: qdrant/qdrant:v1.12.4
+    restart: unless-stopped
+    environment:
+      QDRANT__SERVICE__API_KEY: ${QDRANT_API_KEY:?}
+    volumes:
+      - qdrant_data:/qdrant/storage
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c ':> /dev/tcp/127.0.0.1/6333' || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    networks: [data]
+    mem_limit: 768m
+    logging: *default-logging
+
+networks:
+  edge: {}
+  data:
+    internal: true
+
+volumes:
+  pgdata:
+  redisdata:
+  qdrant_data:
+  caddy_data:
+  caddy_config:
